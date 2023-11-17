@@ -2616,6 +2616,7 @@ int SO_switch,MPI_tunedgrid_flag,Voronoi_Charge_flag,Voronoi_OrbM_flag;
 int Constraint_NCS_switch,openmp_threads_eq_procs,openmp_threads_num;
 int Zeeman_NCS_switch,Zeeman_NCO_switch;
 int Global_Zeeman_NC_switch; //Kiem
+int Mag_Dipole_switch; //Kiem
 int atomnum;
 //int Catomnum,Latomnum,Ratomnum;
 int POLES,rlmax,Solver,dste_flag,Ngrid_fixed_flag,scf_eigen_lib_flag;

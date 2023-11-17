@@ -1125,9 +1125,20 @@ void Input_std(char *file)
 
 /* D.H. Kiem : Zeeman term in Global magnetic field for NC system. ENDLINE */
 
+/* D.H. Kiem : Magnetic dipole-dipole interaction for classical NC spins. STARTLINE */
 
+  input_logical("scf.NC.Mag.Dipole",&Mag_Dipole_switch,0);
 
+  if (SpinP_switch!=3 && Mag_Dipole_switch==1){
+    if (myid==Host_ID){
+      printf("The Magnetic dipole-dipole interaction is not supported for a collinear DFT calculation.\n");
+      printf("Check your input file.\n\n");
+    }
+    MPI_Finalize();
+    exit(0);
+  }
 
+/* D.H. Kiem : Magnetic dipole-dipole interaction for classical NC spins. ENDLINE */
 
 
 
