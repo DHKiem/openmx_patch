@@ -1434,17 +1434,29 @@ void Spectra_Gaussian( int pdos_n, int *pdos_atoms, char *basename, int Dos_N,
                   }
 		}
 	      }
-        for (i=0; i<=(knum_i-1); i++){ // for k-resolution
-          for (j=0; j<=(knum_j-1); j++){      
+
+  
 	      if (SpinP_switch==1) {
-		fprintf(fp_Dos,"%lf %lf %lf %lf %lf\n", (DosE[ie])*eV2Hartree,
-                        dossum[0][i][j],-dossum[1][i][j], ssum[0][ie], ssum[1][ie]);
-	      }
-	      else {
-		fprintf(fp_Dos,"%lf %lf %lf\n", (DosE[ie])*eV2Hartree, dossum[0][i][j]*2.0, ssum[0][ie]*2.0);
-	      }
+        fprintf(fp_Dos,"%lf ", (DosE[ie])*eV2Hartree);      
+        for (i=0; i<=(knum_i-1); i++){ // for k-resolution
+          for (j=0; j<=(knum_j-1); j++){    
+		fprintf(fp_Dos,"%lf %lf ", 
+                        dossum[0][i][j],-dossum[1][i][j] );
           }//j
         }//i
+        fprintf(fp_Dos,"%lf %lf\n", ssum[0][ie], ssum[1][ie]);
+	      }
+	      else {
+        fprintf(fp_Dos,"%lf ", (DosE[ie])*eV2Hartree);
+        for (i=0; i<=(knum_i-1); i++){ // for k-resolution
+          for (j=0; j<=(knum_j-1); j++){              
+		fprintf(fp_Dos,"%lf ",  dossum[0][i][j]*2.0);
+          }//j
+        }//i    
+        fprintf(fp_Dos,"%lf \n",  ssum[0][ie]*2.0);
+	      }
+
+
 
 	    }
 	  }
@@ -1569,7 +1581,7 @@ void Spectra_Gaussian( int pdos_n, int *pdos_atoms, char *basename, int Dos_N,
     fprintf(fp_Dos,"%lf %lf %lf ", (DosE[ie])*eV2Hartree,ssum[0][ie], ssum[1][ie]);
     for (i=0; i<=(knum_i-1); i++){
       for (j=0; j<=(knum_j-1); j++){
-        fprintf(fp_Dos,"%lf %lf ", dossum[0][i][j], dossum[1][j][j]);
+        fprintf(fp_Dos,"%lf %lf ", dossum[0][i][j], -dossum[1][i][j]);
       }
     }
     fprintf(fp_Dos," \n");
